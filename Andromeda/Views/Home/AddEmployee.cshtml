@@ -1,0 +1,73 @@
+﻿@model Andromeda.Application.Employee.Queries.EmployeeDetailVM
+
+@{
+    ViewData["Title"] = "AddEmployee";
+}
+<br>
+<h1>ADD EMPLOYEE</h1>
+<br>
+
+<form asp-action="SaveEmployee" asp-controller="User" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">FIRST NAME</label>
+                <input asp-for="Firstname" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">LAST NAME</label>
+                <input asp-for="Lastname" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">ADDRESS</label>
+                <input asp-for="Address" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">EMAIL</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">NUMBER</label>
+                <input asp-for="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">EMPLOYEE ROLE</label>
+                <select asp-for="Role" class="form-control">
+                    <option value="2">Regular</option>
+                    <option value="1">Admin</option>
+                </select>
+            </div><br />
+            <div class="form-group">
+                <input type="submit" value="SUBMIT" class="btn btn-primary" data-toggle="modal" data-target="#myModal" />
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+<div id="myModal" class="modal" role="contentinfo">
+    <div class="modal-dialog modal-lg" style="width:90%">
+
+        <!-- Modal content-->
+        <div class="modal-content"></div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e);
+            $('#myModal .modal-content').html(e);
+        }
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}
+
+

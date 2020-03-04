@@ -1,0 +1,92 @@
+﻿@model Andromeda.Models.LoginVM
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<center>
+    <div style="height:500px;width:500px; background-color:#A8E6CF;">
+        <br><br><br>
+        <h2 style="color:#633a82;">Uniwallet</h2>
+        <br><br>
+
+        <form asp-action="VerifyLogin" asp-controller="Login" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+            <div class="col-md-7">
+                <div class="form-group">
+                    <label class="control-label">USERNAME</label><br />
+                    <input asp-for="Username" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">PASSWORD</label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <br><input type="submit" value="Log in" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</center>
+
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e); 
+            if (e == true) {
+
+                alert("Welcome");
+                window.location = "/Home/Dashboard";
+            }
+           
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
+
+
+@*@section Scripts {
+
+        <script>
+            $('document').ready(function () {
+                $('#btnLogIn').on('click', function () {
+                    var _username = $('#txtUsername').val();
+                    var _password = $('#txtPassword').val();
+                    var _user =
+                    {
+                        username: _username,
+                        password: _password
+                    };
+                    $.post('/Login/VerifyLogin', { logindetails: _user }).done(Reply);
+                });
+            });
+
+
+            function Reply(reply) {
+
+                if (reply == true) {
+                    alert("WELCOME");
+                    window.location = "/Home/Dashboard";
+                }
+                else {
+                    alert("LOGIN FAILED");
+                }
+            }
+        </script>
+    }*@
+
+

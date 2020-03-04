@@ -1,0 +1,35 @@
+﻿@model Andromeda.Models.DashboardVM
+@{
+    ViewData["Title"] = "AdminView";
+}
+    <div class="text-center">
+
+        <h1>ADMIN DASHBOARD</h1>
+
+        <div class="form-group">
+            <input type="submit" id="btnAddEmployee" value="ADD EMPLOYEE" class="btn btn-primary" />
+            <input type="submit" id="btnDailyReport" value="CHECK DTR" class="btn btn-primary" />
+        </div>
+
+        @{
+            if (Model.LogType == Andromeda.Application.Employee.Queries.LogType.TimeIn)
+            {
+                <div class="form-group">
+                    <input type="submit" id="btnTimeIn" value="<< TIME IN >>" class="btn btn-primary" />
+                </div>
+
+            }
+            else if (Model.LogType == Andromeda.Application.Employee.Queries.LogType.TimeOut)
+            {
+
+                <div class="form-group">
+                    <input type="submit" id="btnTimeOut" value="<< TIME OUT >>" class="btn btn-primary" />
+                </div>
+            }
+            else
+            {
+                <p>*****</p>
+            }
+        }
+    </div>
+

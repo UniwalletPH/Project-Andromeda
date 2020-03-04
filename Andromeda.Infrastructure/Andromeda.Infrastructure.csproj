@@ -1,0 +1,45 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200224062310_init.cs" />
+    <Compile Remove="Migrations\20200224062310_init.Designer.cs" />
+    <Compile Remove="Migrations\20200224084219_initial.cs" />
+    <Compile Remove="Migrations\20200224084219_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200224085237_initial.cs" />
+    <Compile Remove="Migrations\20200224085237_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200224090448_initial.cs" />
+    <Compile Remove="Migrations\20200224090448_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200224121036_initial.cs" />
+    <Compile Remove="Migrations\20200224121036_initial.Designer.cs" />
+    <Compile Remove="Migrations\20200224130629_init.cs" />
+    <Compile Remove="Migrations\20200224130629_init.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Persistence\Configuration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Andromeda.Application\Andromeda.Application.csproj" />
+    <ProjectReference Include="..\Andromeda.Domain\Andromeda.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

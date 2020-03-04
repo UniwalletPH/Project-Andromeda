@@ -1,0 +1,57 @@
+﻿@model List<Andromeda.Models.TimeRecordVM>
+@{
+    ViewData["Title"] = "_recordView";
+}
+
+
+
+    <br /><h3>Employee's Time Records</h3>
+
+
+<table class="record" style="width:100%">
+    <tr>
+        <th>DATE</th>
+        <th>TIME IN</th>
+        <th>TIME OUT</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Date.ToShortDateString()</td>
+            <td>@item.TimeIn.Value.ToShortTimeString()</td>
+            <td>@item.TimeOut.Value.ToShortTimeString()</td>
+        </tr>
+    }
+
+</table>
+
+
+
+<style>
+   
+
+    .record tr {
+        background-color: #eee;
+        border-top: 1px solid #fff;
+    }
+
+    .record td {
+        padding: 8px 2px 10px 20px;
+    }
+
+    .record tr:hover {
+        background-color: #ccc;
+    }
+
+    .record th {
+        background-color: #fff;
+    }
+
+    .record th, #example td {
+        padding: 8px 2px 10px 20px;
+    }
+
+    .record td:hover {
+        cursor: pointer;
+    }
+</style>

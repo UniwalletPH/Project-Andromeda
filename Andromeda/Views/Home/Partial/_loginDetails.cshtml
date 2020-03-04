@@ -1,0 +1,27 @@
+﻿@model Andromeda.Application.Login.Queries.LoginDetailsVM
+@{
+    ViewData["Title"] = "_loginDetails";
+}
+    
+
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        
+    </div>
+<div class="modal-body">
+    <div class="text-center">
+        <br>
+        <div class="text-center"><h3>EMPLOYEE ADDED</h3></div><br />
+
+        <h4>YOUR LOG IN DETAILS</h4><br />
+
+        <h5>USERNAME: @Model.Username</h5><br />
+        <h5>PASSWORD: @Model.Password</h5>
+
+        <input type="submit" id="btnDone" value="Done" class="btn btn-primary" />
+    </div>
+
+
+</div>
+
