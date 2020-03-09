@@ -31,7 +31,7 @@ namespace Andromeda.Models
             
         }
 
-        public async Task<SignInResult> PasswordSignInAsync(string userName, string password, bool isPersistent, bool lockoutOnFailure)
+        public async Task<SignInResult> PasswordSignInAsync(string userName, string password)
         {
             try
             {
@@ -63,18 +63,7 @@ namespace Andromeda.Models
         {
             try
             {
-                var _user = await mediator.Send(new FindUserQuery { Username = userName });
-
-                Startup.UserDashboard = new DashboardVM
-                {
-                    ID = _user.ID,
-                    Firstname = _user.Firstname,
-                    Lastname = _user.Lastname,
-                    Address = _user.Address,
-                    Email = _user.Email,
-                    Number = _user.Number,
-                    Role = _user.Role
-                };
+                var _user = await mediator.Send(new FindUserQuery { Username = userName });   
 
                 Guid _sessionUID = Guid.NewGuid();
 

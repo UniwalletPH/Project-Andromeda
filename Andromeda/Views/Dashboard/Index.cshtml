@@ -1,0 +1,127 @@
+﻿@model Andromeda.Models.DashboardVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+    <div class="text-center">
+        <br><br /><br /><h2>DASHBOARD</h2><br>
+        <div>
+            <div id="profile">
+                @Html.Partial("~/Views/Dashboard/Partial/_Profile.cshtml", Model.EmployeeDetails)
+            </div>
+            <div class="form-group">
+                <input type="submit" id="btnChangeUsername" value="CHANGE USERNAME" class="btn btn-primary" />
+                <input type="submit" id="btnChangePassword" value="CHANGE PASSWORD" class="btn btn-primary" />
+            </div><br>
+        </div>
+   
+
+        @{if (Model.EmployeeDetails.Role == Andromeda.Domain.Enums.UserRole.Admin)
+            {
+                <div class="form-group">
+                    <input type="submit" id="btnAddEmployee" value="ADD EMPLOYEE" class="btn btn-primary" />
+                    <input type="submit" id="btnDailyReport" value="DTR REPORT" class="btn btn-primary" />
+                </div>
+
+
+                if (Model.LogType == Andromeda.Application.Employee.Queries.LogType.TimeIn)
+                {
+                    <div class="form-group">
+                        <input type="submit" id="btnTimeIn" value="<< TIME IN >>" class="btn btn-primary" />
+                    </div>
+
+                }
+                else if (Model.LogType == Andromeda.Application.Employee.Queries.LogType.TimeOut)
+                {
+
+                    <div class="form-group">
+                        <input type="submit" id="btnTimeOut" value="<< TIME OUT >>" class="btn btn-primary" />
+                    </div>
+                }
+                else
+                {
+                    <p>*****</p>
+                }
+            }
+            else
+            {
+
+
+                if (Model.LogType == Andromeda.Application.Employee.Queries.LogType.TimeIn)
+                {
+                    <div class="form-group">
+                        <input type="submit" id="btnTimeIn" value="<< TIME IN >>" class="btn btn-primary" />
+                    </div>
+                }
+                else if (Model.LogType == Andromeda.Application.Employee.Queries.LogType.TimeOut)
+                {
+                    <div class="form-group">
+                        <input type="submit" id="btnTimeOut" value="<< TIME OUT >>" class="btn btn-primary" />
+                    </div>
+                }
+                else
+                {
+                    <p>*****</p>
+                }
+
+            }
+        }
+
+    </div>
+
+   
+
+
+@section Scripts {
+
+    <script>
+
+        $('document').ready(function () {
+            $('#btnTimeIn').on('click', function () {
+                $.get('/Dashboard/TimeIn').done();
+                alert("TIME IN RECORDED");
+                window.location = "/User/LogIn";
+
+            });
+        });
+
+        $('document').ready(function () {
+            $('#btnTimeOut').on('click', function () {
+                $.get('/Dashboard/TimeOut').done();
+                alert("TIME OUT RECORDED");
+                window.location = "/User/LogIn";
+
+            });
+        });
+
+        $('document').ready(function () {
+            $('#btnAddEmployee').on('click', function () {
+                window.location = "/User/AddEmployee";
+            })
+        });
+
+        $('document').ready(function () {
+            $('#btnDailyReport').on('click', function () {
+                window.location = "/Dashboard/DTRReport";
+
+            });
+        });
+
+         $('document').ready(function () {
+            $('#btnChangeUsername').on('click', function () {
+                window.location = "/Account/ChangeUsername";
+
+            });
+         });
+
+         $('document').ready(function () {
+            $('#btnChangePassword').on('click', function () {
+                window.location = "/Account/ChangePassword";
+
+            });
+        });
+
+
+    </script>
+}

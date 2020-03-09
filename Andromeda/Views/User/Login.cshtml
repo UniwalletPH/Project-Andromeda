@@ -17,7 +17,7 @@
         <h2 style="color:#633a82;">Uniwallet</h2>
         <br><br>
 
-        <form asp-action="VerifyLogin" asp-controller="Login" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+        <form asp-action="Login" asp-controller="User" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
             <div class="col-md-7">
                 <div class="form-group">
                     <label class="control-label">USERNAME</label><br />
@@ -40,53 +40,17 @@
 @section Scripts {
     <script type="text/javascript">
         function OnSuccess(e) {
-            console.log(e); 
+            console.log(e);
             if (e == true) {
-
-                alert("Welcome");
-                window.location = "/Home/Dashboard";
+                window.location = "/Dashboard/Index";
             }
-           
+            else {
+                alert("Invalid Username or Password");
+            }
+
         }
     </script>
 
     <partial name="_ValidationScriptsPartial" />
 }
-
-
-
-
-
-
-
-@*@section Scripts {
-
-        <script>
-            $('document').ready(function () {
-                $('#btnLogIn').on('click', function () {
-                    var _username = $('#txtUsername').val();
-                    var _password = $('#txtPassword').val();
-                    var _user =
-                    {
-                        username: _username,
-                        password: _password
-                    };
-                    $.post('/Login/VerifyLogin', { logindetails: _user }).done(Reply);
-                });
-            });
-
-
-            function Reply(reply) {
-
-                if (reply == true) {
-                    alert("WELCOME");
-                    window.location = "/Home/Dashboard";
-                }
-                else {
-                    alert("LOGIN FAILED");
-                }
-            }
-        </script>
-    }*@
-
 

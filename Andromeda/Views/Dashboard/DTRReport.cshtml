@@ -1,8 +1,12 @@
 ﻿@model Andromeda.Models.DTRReportVM
 @{
-    ViewData["Title"] = "DailyReport";
+    ViewData["Title"] = "DTRReport";
 }
-<br/><br>
+
+
+
+<br>
+<br>
 <h1>DTR REPORT</h1>
 
 
@@ -16,9 +20,9 @@
         <div class="col-md-4">
             <div>
                 <label class="control-label">FROM</label>
-                <input asp-for="From" class="form-control" />               
-               <br> <label class="control-label">TO</label>
-                <input asp-for="To" class="form-control" />             
+                <input asp-for="From" class="form-control" />
+                <br> <label class="control-label">TO</label>
+                <input asp-for="To" class="form-control" />
             </div>
         </div>
     </div>
@@ -36,7 +40,7 @@
     <script type="text/javascript">
         function OnSuccess(e) {
             console.log(e);
-            $('#recordview .record-content').html(e);           
+            $('#recordview .record-content').html(e);
     }
     </script>
 

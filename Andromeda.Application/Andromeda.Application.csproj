@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Account\Queries\" />
     <Folder Include="Login\Commands\" />
     <Folder Include="Report\Commands\" />
   </ItemGroup>

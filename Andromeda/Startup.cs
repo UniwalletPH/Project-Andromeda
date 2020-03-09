@@ -19,9 +19,7 @@ namespace Andromeda
 {
     public class Startup
     {
-        public static DashboardVM UserDashboard;
        
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

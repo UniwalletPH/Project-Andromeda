@@ -1,4 +1,5 @@
 ﻿using Andromeda.Application.Account.Commands;
+using Andromeda.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Andromeda.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly IMediator mediator;
         public AccountController(IMediator mediator)
@@ -16,10 +17,28 @@ namespace Andromeda.Controllers
             this.mediator = mediator;
         }
 
-        public async Task<IActionResult> ChangeUsername(string newUsername)
+        public IActionResult ChangeUsername()
         {
-            var _retVal = await mediator.Send(new ChangeUsernameCommand { UserID = Startup.UserDashboard.ID , NewUsername = newUsername});
+            return View();
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> ChangeUsername(AccountVM data)
+        {        
+            
+            return Json(true);
+        }
+
+        public IActionResult ChangePassword()
+        {
+
+             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(AccountVM data)
+        {
+            var x = await mediator.Send(new ChangePasswordCommand { UserID = CurrentUser.ID, Data = data.ChangePassword });
             return Json(true);
         }
       

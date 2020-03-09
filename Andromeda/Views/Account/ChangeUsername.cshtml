@@ -1,0 +1,43 @@
+﻿@model Andromeda.Models.AccountVM
+@{
+    ViewData["Title"] = "ChangeUsername";
+}
+
+
+<center>
+    <div style="margin-top: 120px; height:600px; width:500px; background-color:#A8E6CF;">
+        <div style="padding-top: 100px;">
+            
+            <h2>CHANGE USERNAME</h2>
+            <br><br>
+
+            <form asp-action="ChangeUsername" asp-controller="Account" data-ajax="true" data-ajax-method="post" data-ajax-success="OnSuccess">
+                <div class="col-md-7">
+                    <div class="form-group">
+                        <label class="control-label">NEW USERNAME</label><br />
+                        <input asp-for="ChangeUsername.NewUsername"  class="form-control" />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">CONFIRM USING PASSWORD</label>
+                        <input asp-for="ChangeUsername.Password" type="password" class="form-control" />
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <br><input type="submit" value="CHANGE" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</center>
+
+@section Scripts {
+    <script type="text/javascript">
+        function OnSuccess(e) {
+            console.log(e);
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}

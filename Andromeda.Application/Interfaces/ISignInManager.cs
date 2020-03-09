@@ -8,7 +8,7 @@ namespace Andromeda.Application.Interfaces
 {
     public interface ISignInManager
     {
-        Task<SignInResult> PasswordSignInAsync(string userName, string password, bool isPersistent, bool lockoutOnFailure);
+        Task<SignInResult> PasswordSignInAsync(string userName, string password);
 
         Task<SignInResult> SignInAsync(string userName);
 

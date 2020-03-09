@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetOpenAuth.InfoCard.UI" Version="4.3.4.13329" />
     <PackageReference Include="MediatR" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.2">
@@ -22,9 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Account\" />
+    <Folder Include="Views\Account\Partial\" />
+    <Folder Include="Views\Home\Partial\" />
     <Folder Include="Views\Login\" />
-    <Folder Include="Views\User\" />
   </ItemGroup>
 
 

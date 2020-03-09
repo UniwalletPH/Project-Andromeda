@@ -3,48 +3,39 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Andromeda.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
+using System.Text.Json;
+using Andromeda.Application.Employee.Queries;
+using Andromeda.Application.Record.Queries;
+using MediatR;
+using System.Threading.Tasks;
 
 namespace Andromeda.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHttpContextAccessor httpContextAccessor;
+        private readonly IMediator mediator;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IHttpContextAccessor httpContextAccessor, IMediator mediator)
         {
             _logger = logger;
+            this.httpContextAccessor = httpContextAccessor;
+            this.mediator = mediator;
         }
 
         public IActionResult Index()
         {
-            return View();
-        }
-        
-        public IActionResult AddEmployee()
-        {
-            return View();
-        }
+            if (CurrentUser != null)
+            {
+                return Redirect("/Home/Dashboard");
+            }
 
-        public IActionResult Login()
-        {
-            return View();
+            return Redirect("/User/Login");
         }
-
-      
-        public IActionResult Dashboard()
-        {
-            return View(Startup.UserDashboard);
-        }
-
-        public IActionResult ChangeUsername()
-        {
-            return View();
-        }
-
-        public IActionResult ChangePassword()
-        {
-            return View();
-        }
+    
 
         public IActionResult Privacy()
         {

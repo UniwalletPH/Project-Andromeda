@@ -9,20 +9,21 @@ namespace Andromeda.Models
 {
     public class DashboardVM
     {
+        public EmployeeDetailVM EmployeeDetails { get; set; }
 
-        public int ID { get; set; }
+        //public int ID { get; set; }
 
-        public string Firstname { get; set; }
+        //public string Firstname { get; set; }
 
-        public string Lastname { get; set; }
+        //public string Lastname { get; set; }
 
-        public string Address { get; set; }
+        //public string Address { get; set; }
 
-        public string Email { get; set; }
+        //public string Email { get; set; }
 
-        public string Number { get; set; }
+        //public string Number { get; set; }
 
-        public UserRole Role { get; set; }
+        //public UserRole Role { get; set; }
 
         public LogType LogType { get; set; }
     }

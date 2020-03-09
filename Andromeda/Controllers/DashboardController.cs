@@ -1,4 +1,5 @@
 ﻿using Andromeda.Application.Employee.Queries;
+using Andromeda.Application.Interfaces;
 using Andromeda.Application.Record.Commands;
 using Andromeda.Application.Record.Queries;
 using Andromeda.Models;
@@ -13,40 +14,76 @@ using System.Threading.Tasks;
 
 namespace Andromeda.Controllers
 {
-    public class DashboardController : Controller
+    public class DashboardController : BaseController
     {
         private readonly IMediator mediator;
-        public DashboardController(IMediator mediator)
+        private readonly ISignInManager signInManager;
+     
+        public DashboardController(IMediator mediator, ISignInManager signInManager)
         {
             this.mediator = mediator;
+            this.signInManager = signInManager;
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult AdminView()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View(Startup.UserDashboard);
+            var _currentUser = CurrentUser;
+
+            var _user = new EmployeeDetailVM
+            { 
+            ID = _currentUser.ID,
+            Firstname = _currentUser.Firstname,
+            Lastname = _currentUser.Lastname,
+            Address = _currentUser.Address,
+            Email = _currentUser.Email,
+            Number = _currentUser.Number,
+            Role = _currentUser.Role
+            };
+
+            var _userDashboard = new DashboardVM
+            { 
+            EmployeeDetails = _user
+            };
+
+            var _timeInCheck = await mediator.Send(new TimeInCheckerQuery { EmployeeID = _userDashboard.EmployeeDetails.ID });
+            var _timeOutCheck = await mediator.Send(new TimeOutCheckerQuery { EmployeeID = _userDashboard.EmployeeDetails.ID });
+
+            if (_timeInCheck == true && _timeOutCheck == true)
+            {
+                _userDashboard.LogType = LogType.None;
+            }
+            else if (_timeInCheck == false && _timeOutCheck == false)
+            {
+                _userDashboard.LogType = LogType.TimeIn;
+            }
+            else if (_timeInCheck == true && _timeOutCheck == false)
+            {
+                _userDashboard.LogType = LogType.TimeOut;
+            }
+
+            return View(_userDashboard);
         }
-      
-        public IActionResult UserView()
-        {
-            return View(Startup.UserDashboard);
-        }
+
 
         public async Task<IActionResult> TimeIn()
         {
-            var _retVal = await mediator.Send(new SaveTimeInCommand { EmployeeID = Startup.UserDashboard.ID});
+            var _retVal = await mediator.Send(new SaveTimeInCommand { EmployeeID = CurrentUser.ID });
+
+            
 
             return Json(_retVal);
         }
 
         public async Task<IActionResult> TimeOut()
         {
-            var _retVal = await mediator.Send(new SaveTimeOutCommand { EmployeeID = Startup.UserDashboard.ID});
+            var _retVal = await mediator.Send(new SaveTimeOutCommand { EmployeeID = CurrentUser.ID});
 
             return Json(_retVal);
         }
 
-        public async Task<IActionResult> DailyReport()
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DTRReport()
         {
 
             var _retVal = await mediator.Send(new GetListOfEmployeeQuery { });
@@ -79,8 +116,6 @@ namespace Andromeda.Controllers
         public async Task<IActionResult> ViewRecord(DTRReportVM reportDetails)
         {
 
-
-
             var _retValIn = await mediator.Send(new GetTimeInDetailQuery { EmployeeID = reportDetails.Selected, From = reportDetails.From, To = reportDetails.To});
             var _retValOut = await mediator.Send(new GetTimeOutDetailQuery { EmployeeID = reportDetails.Selected, From = reportDetails.From, To =reportDetails.To});
 
@@ -102,7 +137,7 @@ namespace Andromeda.Controllers
                         };
 
                         a.Add(x);
-                    }
+                    }                 
                 }    
             }
 
