@@ -1,4 +1,5 @@
 ﻿using Andromeda.Application.Account.Commands;
+using Andromeda.Application.Account.Queries;
 using Andromeda.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -24,8 +25,10 @@ namespace Andromeda.Controllers
 
         [HttpPost]
         public async Task<IActionResult> ChangeUsername(AccountVM data)
-        {        
-            
+        {
+            var _rV = await mediator.Send(new ChangeUsernameCommand { UserID = CurrentUser.ID , Data = data.ChangeUsername});
+
+
             return Json(true);
         }
 
@@ -38,7 +41,8 @@ namespace Andromeda.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword(AccountVM data)
         {
-            var x = await mediator.Send(new ChangePasswordCommand { UserID = CurrentUser.ID, Data = data.ChangePassword });
+            var _rV = await mediator.Send(new ChangePasswordCommand { UserID = CurrentUser.ID, Data = data.ChangePassword });
+            
             return Json(true);
         }
       

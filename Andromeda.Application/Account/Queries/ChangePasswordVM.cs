@@ -14,7 +14,6 @@ namespace Andromeda.Application.Account.Queries
         public string NewPassword { get; set; }
 
         [Required(ErrorMessage = "Confirm password is required")]
-        [Compare("NewPassword", ErrorMessage = "Confirm password not match")]
         public string ConfirmPassword { get; set; }
     }
 }
