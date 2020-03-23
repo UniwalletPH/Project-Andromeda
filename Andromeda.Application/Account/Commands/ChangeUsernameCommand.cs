@@ -34,10 +34,8 @@ namespace Andromeda.Application.Account.Commands
 
                 if (passwordHasher.IsPasswordVerified(_user.Salt, _user.Password, request.Data.Password))
                 {
-                    var _loginDetail = dbContext.UserLogins.Find(request.UserID);
-                    _loginDetail.Username = request.Data.NewUsername;
+                    _user.Username = request.Data.NewUsername;
                     await dbContext.SaveChangesAsync();
-
                 }
                 else
                 {

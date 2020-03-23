@@ -3,14 +3,6 @@
     ViewData["Title"] = "Index";
 }
 
-
-@{ 
-    if (User.IsInRole("Admin"))
-    { 
-    <p>LALABAS TO KAPAG ADMIN</p>
-    }
-}
-
     <div class="text-center">
         <br><br /><br /><h2>DASHBOARD</h2><br>
         <div>
@@ -22,7 +14,7 @@
                 <input type="submit" id="btnChangePassword" value="CHANGE PASSWORD" class="btn btn-primary" />
             </div><br>
         </div>
-   
+
 
         @{if (Model.EmployeeDetails.Role == Andromeda.Domain.Enums.UserRole.Admin)
             {
@@ -73,6 +65,8 @@
                 }
 
             }
+
+            <input type="submit" id="btnLogOut" value="Logout" class="btn btn-primary" />
         }
 
     </div>
@@ -126,6 +120,14 @@
             $('#btnChangePassword').on('click', function () {
                 window.location = "/Account/ChangePassword";
 
+            });
+         });
+
+        $('document').ready(function () {
+            $('#btnLogOut').on('click', function () {
+                   window.location = "/User/Logout";
+
+                 
             });
         });
 

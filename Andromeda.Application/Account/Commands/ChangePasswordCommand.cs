@@ -44,7 +44,7 @@ namespace Andromeda.Application.Account.Commands
                 }
                 else
                 {
-                    throw new Exception("New Password didnt match to the Confirma Password");
+                    throw new Exception("New Password did not match");
                 }
 
                 return true;

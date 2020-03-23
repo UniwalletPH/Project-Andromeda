@@ -28,6 +28,7 @@
                     <label class="control-label">PASSWORD</label>
                     <input asp-for="Password" type="password" class="form-control" />
                     <span class="text-danger"></span>
+                    <br><div id="promp"></div>
                 </div>
                 <div class="form-group">
                     <br><input type="submit" value="Log in" class="btn btn-primary" />
@@ -38,16 +39,18 @@
 </center>
 
 @section Scripts {
+    
+
     <script type="text/javascript">
-        function OnSuccess(e) {
+
+        function OnSuccess(e) { 
             console.log(e);
-            if (e == true) {
-                window.location = "/Dashboard/Index";
+            if (e.success) {
+                window.location = e.redirect
             }
             else {
-                alert("Invalid Username or Password");
+                 $('#promp').html(e);
             }
-
         }
     </script>
 

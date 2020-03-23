@@ -6,8 +6,6 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Andromeda.Controllers
@@ -36,23 +34,46 @@ namespace Andromeda.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDetailsVM loginDetails)
         {
-            var x = await signInManager.PasswordSignInAsync(loginDetails.Username, loginDetails.Password);
+            try
+            {
+                var _result = await signInManager.PasswordSignInAsync(loginDetails.Username, loginDetails.Password);
 
-            if (x.Succeeded)
-            {
-                return Json(true);
+                if (_result.Succeeded)
+                {
+                    return Json(new
+                    {
+                        Success = true,
+                        Redirect = "/Dashboard/Index"
+                    });
+                }
+                else
+                {
+                    throw new Exception(_result.Message);
+                }
+               
             }
-            else
+            catch (Exception ex)
             {
-                return Json(false);
-            }           
+                return ErrorView(ex);
+            } 
         }
+
+
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOut();
+
+            return RedirectToAction("Login", "User");
+
+        }
+
 
         [Authorize(Roles = "Admin")]
         public IActionResult AddEmployee()
         {
             return View();
         }
+
 
         public async Task<IActionResult>  SaveEmployee(EmployeeDetailVM employee)
         {

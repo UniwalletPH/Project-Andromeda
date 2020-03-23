@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Andromeda.Controllers
@@ -25,51 +24,68 @@ namespace Andromeda.Controllers
             this.signInManager = signInManager;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
-            var _currentUser = CurrentUser;
 
-            var _user = new EmployeeDetailVM
-            { 
-            ID = _currentUser.ID,
-            Firstname = _currentUser.Firstname,
-            Lastname = _currentUser.Lastname,
-            Address = _currentUser.Address,
-            Email = _currentUser.Email,
-            Number = _currentUser.Number,
-            Role = _currentUser.Role
-            };
-
-            var _userDashboard = new DashboardVM
-            { 
-            EmployeeDetails = _user
-            };
-
-            var _timeInCheck = await mediator.Send(new TimeInCheckerQuery { EmployeeID = _userDashboard.EmployeeDetails.ID });
-            var _timeOutCheck = await mediator.Send(new TimeOutCheckerQuery { EmployeeID = _userDashboard.EmployeeDetails.ID });
-
-            if (_timeInCheck == true && _timeOutCheck == true)
+          
+            if (CurrentUser != null)
             {
-                _userDashboard.LogType = LogType.None;
-            }
-            else if (_timeInCheck == false && _timeOutCheck == false)
-            {
-                _userDashboard.LogType = LogType.TimeIn;
-            }
-            else if (_timeInCheck == true && _timeOutCheck == false)
-            {
-                _userDashboard.LogType = LogType.TimeOut;
+
+                try
+                {
+                    var _currentUser = CurrentUser;
+
+                    var _user = new EmployeeDetailVM
+                    {
+                        ID = _currentUser.ID,
+                        Firstname = _currentUser.Firstname,
+                        Lastname = _currentUser.Lastname,
+                        Address = _currentUser.Address,
+                        Email = _currentUser.Email,
+                        Number = _currentUser.Number,
+                        Role = _currentUser.Role
+                    };
+
+                    var _userDashboard = new DashboardVM
+                    {
+                        EmployeeDetails = _user
+                    };
+
+                    var _timeInCheck = await mediator.Send(new TimeInCheckerQuery { EmployeeID = _userDashboard.EmployeeDetails.ID });
+                    var _timeOutCheck = await mediator.Send(new TimeOutCheckerQuery { EmployeeID = _userDashboard.EmployeeDetails.ID });
+
+                    if (_timeInCheck == true && _timeOutCheck == true)
+                    {
+                        _userDashboard.LogType = LogType.None;
+                    }
+                    else if (_timeInCheck == false && _timeOutCheck == false)
+                    {
+                        _userDashboard.LogType = LogType.TimeIn;
+                    }
+                    else if (_timeInCheck == true && _timeOutCheck == false)
+                    {
+                        _userDashboard.LogType = LogType.TimeOut;
+                    }
+
+                    return View(_userDashboard);
+                }
+
+                catch (Exception ex)
+                {
+                    return ErrorView(ex);
+                }
             }
 
-            return View(_userDashboard);
+            else
+            {
+                return Redirect("/User/Login");
+            }
         }
 
 
         public async Task<IActionResult> TimeIn()
         {
-            var _retVal = await mediator.Send(new SaveTimeInCommand { EmployeeID = CurrentUser.ID });
-
-            
+            var _retVal = await mediator.Send(new SaveTimeInCommand { EmployeeID = CurrentUser.ID }); 
 
             return Json(_retVal);
         }
@@ -86,19 +102,19 @@ namespace Andromeda.Controllers
         public async Task<IActionResult> DTRReport()
         {
 
-            var _retVal = await mediator.Send(new GetListOfEmployeeQuery { });
+            var _employeeList = await mediator.Send(new GetListOfEmployeeQuery { });
 
-            var _x = new List<EmployeeDetailVM>();
+            var _employeeNameList = new List<EmployeeDetailVM>();
 
-            foreach (var item in _retVal)
+            foreach (var item in _employeeList)
             {
-                _x.Add(item);
+                _employeeNameList.Add(item);
             }
 
             var mod = new DTRReportVM();
             var selectList = new List<SelectListItem>();
 
-            foreach (var item in _x)
+            foreach (var item in _employeeNameList)
             {
                 selectList.Add(new SelectListItem{
                 

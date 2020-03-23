@@ -26,10 +26,22 @@ namespace Andromeda.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangeUsername(AccountVM data)
         {
-            var _rV = await mediator.Send(new ChangeUsernameCommand { UserID = CurrentUser.ID , Data = data.ChangeUsername});
+            try
+            {
+                var _rV = await mediator.Send(new ChangeUsernameCommand { UserID = CurrentUser.ID, Data = data.ChangeUsername });
 
+                return Json(new
+                { 
+                Success = true,
+                Redirect = "/Dashboard/Index"
+                });
 
-            return Json(true);
+            }
+
+            catch (Exception ex)
+            {
+                return ErrorView(ex);
+            }   
         }
 
         public IActionResult ChangePassword()
@@ -41,9 +53,19 @@ namespace Andromeda.Controllers
         [HttpPost]
         public async Task<IActionResult> ChangePassword(AccountVM data)
         {
-            var _rV = await mediator.Send(new ChangePasswordCommand { UserID = CurrentUser.ID, Data = data.ChangePassword });
-            
-            return Json(true);
+            try
+            {
+                var _rV = await mediator.Send(new ChangePasswordCommand { UserID = CurrentUser.ID, Data = data.ChangePassword });
+
+                return Json( new { 
+                Success = true,
+                Redirect = "/User/Login"
+                });
+            }
+            catch (Exception ex)
+            {
+                return ErrorView(ex);
+            } 
         }
       
     }

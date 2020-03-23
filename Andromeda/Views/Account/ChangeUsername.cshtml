@@ -22,6 +22,7 @@
                         <label class="control-label">CONFIRM USING PASSWORD</label>
                         <input asp-for="ChangeUsername.Password" type="password" class="form-control" />
                         <span class="text-danger"></span>
+                        <br><div id="promp"></div>
                     </div>
                     <div class="form-group">
                         <br><input type="submit" value="CHANGE" class="btn btn-primary" />
@@ -32,10 +33,19 @@
     </div>
 </center>
 
+
+
+
 @section Scripts {
     <script type="text/javascript">
         function OnSuccess(e) {
             console.log(e);
+            if (e.success) {
+                window.location = e.redirect
+            }
+            else {
+                 $('#promp').html(e);
+            }
         }
     </script>
 

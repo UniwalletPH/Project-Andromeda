@@ -40,12 +40,13 @@ namespace Andromeda.Models
 
                 if (_l == null)
                 {
-                    throw new Exception("Invalid username or password");
+                    throw new Exception("Invalid Username or password");
+                  
                 }
 
                 if (!passwordHasher.IsPasswordVerified(_l.Salt, _l.Password, password))
                 {
-                  throw new Exception("invalid username or password");
+                  throw new Exception("Invalid Username or password");
                 }
 
                 return await SignInAsync(userName);
@@ -85,15 +86,14 @@ namespace Andromeda.Models
                 return SignInResult.Success;
             }
             catch (Exception )
-            {
-               
+            {              
                 return SignInResult.Failed;
             }
         }
 
-        public async Task SignOutAsync()
+        public async Task SignOut()
         {
-            contextAccessor.HttpContext.Session.Remove("Impersonate");
+            await contextAccessor.HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);       
         }
     }
 }

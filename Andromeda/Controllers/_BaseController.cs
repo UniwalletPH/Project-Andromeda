@@ -28,5 +28,10 @@ namespace Andromeda.Controllers
             }
         }
 
+        internal ActionResult ErrorView(Exception exception)
+        {
+            return View("~/Views/Error/Index.cshtml", exception);
+        }
+
     }
 }

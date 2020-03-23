@@ -319,7 +319,6 @@ E:\PROJECTS\Project-Andromeda\Andromeda\bin\Debug\netcoreapp3.1\DotNetOpenAuth.C
 E:\PROJECTS\Project-Andromeda\Andromeda\bin\Debug\netcoreapp3.1\DotNetOpenAuth.Core.UI.dll
 E:\PROJECTS\Project-Andromeda\Andromeda\bin\Debug\netcoreapp3.1\DotNetOpenAuth.InfoCard.dll
 E:\PROJECTS\Project-Andromeda\Andromeda\bin\Debug\netcoreapp3.1\DotNetOpenAuth.InfoCard.UI.dll
-E:\PROJECTS\Project-Andromeda\Andromeda\obj\Debug\netcoreapp3.1\Andromeda.MvcApplicationPartsAssemblyInfo.cache
 E:\PROJECTS\Project-Andromeda\Andromeda\obj\Debug\netcoreapp3.1\Razor\Views\User\Login.cshtml.g.cs
 E:\PROJECTS\Project-Andromeda\Andromeda\obj\Debug\netcoreapp3.1\Razor\Views\User\AddEmployee.cshtml.g.cs
 E:\PROJECTS\Project-Andromeda\Andromeda\obj\Debug\netcoreapp3.1\Razor\Views\User\Partial\_UserLoginDetails.cshtml.g.cs
@@ -328,3 +327,5 @@ E:\PROJECTS\Project-Andromeda\Andromeda\obj\Debug\netcoreapp3.1\Razor\Views\Dash
 E:\PROJECTS\Project-Andromeda\Andromeda\obj\Debug\netcoreapp3.1\Razor\Views\Dashboard\Partial\_Profile.cshtml.g.cs
 E:\PROJECTS\Project-Andromeda\Andromeda\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangeUsername.cshtml.g.cs
 E:\PROJECTS\Project-Andromeda\Andromeda\obj\Debug\netcoreapp3.1\Razor\Views\Account\ChangePassword.cshtml.g.cs
+E:\PROJECTS\Project-Andromeda\Andromeda\obj\Debug\netcoreapp3.1\Andromeda.MvcApplicationPartsAssemblyInfo.cache
+E:\PROJECTS\Project-Andromeda\Andromeda\obj\Debug\netcoreapp3.1\Razor\Views\Error\Index.cshtml.g.cs

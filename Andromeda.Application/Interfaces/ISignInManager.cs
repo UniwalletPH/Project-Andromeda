@@ -12,6 +12,6 @@ namespace Andromeda.Application.Interfaces
 
         Task<SignInResult> SignInAsync(string userName);
 
-        Task SignOutAsync();
+        Task SignOut();
     }
 }

@@ -25,7 +25,6 @@
   <ItemGroup>
     <Folder Include="Views\Account\Partial\" />
     <Folder Include="Views\Home\Partial\" />
-    <Folder Include="Views\Login\" />
   </ItemGroup>
 
 
